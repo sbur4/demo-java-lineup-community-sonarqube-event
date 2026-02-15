@@ -1,0 +1,94 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.0-SNAPSHOT'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.lineup.java'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.spring.io/snapshot' }
+}
+
+ext {
+    lombokVersion = "1.18.42"
+    hibernateCoreVersion = "7.3.0.CR2"
+    hibernateValidatorVersion = "9.1.0.Final"
+    h2Version = "2.4.240"
+    junitVersion = "6.1.0-M1"
+}
+
+dependencies {
+    // spring boot 4
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-jetty'
+    implementation 'org.springframework.boot:spring-boot-starter-jackson'
+
+    //apache http5 TODO
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.6'
+    implementation 'org.apache.httpcomponents.core5:httpcore5-h2:5.4.1'
+    implementation 'org.apache.httpcomponents.core5:httpcore5:5.4.1'
+
+    // HTTP/2 TODO
+
+    // HTTP/3 TODO
+    implementation 'org.eclipse.jetty:jetty-alpn-java-server:12.1.6'
+    implementation 'org.eclipse.jetty.http3:jetty-http3-server:12.1.6'
+    implementation 'org.eclipse.jetty.quic:jetty-quic-server:12.1.6'
+    implementation 'org.eclipse.jetty.quic:quic-server:11.0.26'
+//    implementation 'org.eclipse.jetty:jetty-alpn-conscrypt-server:12.1.6'\
+
+    // security 7
+//	implementation 'org.springframework.boot:spring-boot-starter-security' //todo
+//	implementation 'org.springframework.security:spring-security-webauthn' //todo
+
+    // jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // hibernate
+    implementation "org.hibernate.orm:hibernate-core:${hibernateCoreVersion}"
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+    // h2
+    runtimeOnly "com.h2database:h2:${h2Version}"
+
+    // logs
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+
+    // lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // apache commons
+
+    // TODO junit 6
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testRuntimeOnly "com.h2database:h2:${h2Version}"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named('wrapper') {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = '9.3.1'
+}
