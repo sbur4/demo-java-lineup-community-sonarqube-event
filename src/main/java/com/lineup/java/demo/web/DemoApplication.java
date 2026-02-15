@@ -14,3 +14,9 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 }
+
+// todo github actions
+// terraform
+// docker
+// jenkins
+// k8s

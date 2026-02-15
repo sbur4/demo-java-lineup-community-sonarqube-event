@@ -22,9 +22,9 @@ public class User {
     @UuidGenerator
     private UUID id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 }
