@@ -1,9 +1,11 @@
 package com.lineup.java.demo.web.controller;
 
-import com.lineup.java.demo.core.service.UserService;
+import com.lineup.java.demo.core.dto.UserDto;
+import com.lineup.java.demo.core.service.impl.UserServiceImpl;
 import com.lineup.java.demo.data.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,11 +23,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private UserServiceImpl userService;
 
     // NOTE: http://localhost:8181/api/users
     @GetMapping()
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.of(Optional.ofNullable(userService.findAll()));
     }
 
@@ -43,13 +45,13 @@ public class UserController {
 
     // NOTE: http://localhost:8181/api/users/id
     @PutMapping("/{id}")
-    public ResponseEntity<User> fullUpdateById(@PathVariable Long id) {
+    public ResponseEntity<User> fullUpdateById(@PathVariable String id) {
         return ResponseEntity.of(Optional.ofNullable(null));
     }
 
     // NOTE: http://localhost:8181/api/users/id
     @PatchMapping("/{id}")
-    public ResponseEntity<User> partialUpdateById(@PathVariable Long id) {
+    public ResponseEntity<User> partialUpdateById(@PathVariable String id) {
         return ResponseEntity.of(Optional.ofNullable(null));
     }
 

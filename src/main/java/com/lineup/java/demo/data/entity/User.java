@@ -1,11 +1,15 @@
 package com.lineup.java.demo.data.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -15,8 +19,12 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String username;
+    @UuidGenerator
+    private UUID id;
+
+    @Column
+    private String email;
+
+    @Column
     private String password;
 }

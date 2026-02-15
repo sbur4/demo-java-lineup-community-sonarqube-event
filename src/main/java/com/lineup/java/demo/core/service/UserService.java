@@ -1,21 +1,21 @@
 package com.lineup.java.demo.core.service;
 
-import com.lineup.java.demo.data.entity.User;
-import com.lineup.java.demo.data.repository.UserRepo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.lineup.java.demo.core.dto.CreateUserDto;
+import com.lineup.java.demo.core.dto.UserDto;
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
+public interface UserService {
 
-    private final UserRepo userRepo;
+    List<UserDto> findAll();
 
-    // trans
-    // multi
-    public List<User> findAll() {
-        return userRepo.findAll();
-    }
+    UserDto findById(String id);
+
+    UserDto createUser(CreateUserDto dto);
+
+    UserDto fullUpdateById(String id);
+
+    UserDto partialUpdateById(String id);
+
+    Void deleteById(String id);
 }
