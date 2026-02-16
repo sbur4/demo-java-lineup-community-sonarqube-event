@@ -36,9 +36,16 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build and Test
-        # This will run your H2 repository tests and any concurrency tests
-        run: ./gradlew build
+      - name: Build and Analyze
+        env:
+          GITHUB_TOKEN: ${{ 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 }}  # Needed to get PR information
+          SONAR_TOKEN: ${{ 10836c68e92dfed7f604f68c82270f6dcc1a4608 }}
+        # We run 'sonar' alongside build to ensure reports are uploaded
+        run: ./gradlew build sonar --info
+
+#      - name: Build and Test
+#        # This will run your H2 repository tests and any concurrency tests
+#        run: ./gradlew build
 
       - name: Upload Build Artifact
         if: github.ref == 'refs/heads/main'
