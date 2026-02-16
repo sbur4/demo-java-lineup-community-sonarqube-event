@@ -11,13 +11,13 @@ public interface UserService {
 
     UserDto findUserById(String id);
 
-    UserDto findUserByEmail(String id);
+    ResponseUserDto findUserByEmail(String id);
 
-    UserDto createUser(CreateUserDto dto);
+    ResponseUserDto createUser(CreateUserDto dto);
 
-    UserDto fullUpdateUserById(String id);
+    ResponseUserDto fullUpdateUserById(String id);
 
-    UserDto partialUpdateUserById(String id);
+    ResponseUserDto partialUpdateUserById(String id);
 
     Void deleteUserById(String id);
 }

@@ -36,25 +36,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findUserByEmail(String email) {
+    public ResponseUserDto findUserByEmail(String email) {
         return null;
     }
 
 
     @Override
-    public UserDto createUser(CreateUserDto dto) {
+    public ResponseUserDto createUser(CreateUserDto dto) {
 //        User savedUser = userRepository.save(user);
 
         return null;
     }
 
     @Override
-    public UserDto fullUpdateUserById(String id) {
+    public ResponseUserDto fullUpdateUserById(String id) {
         return null;
     }
 
     @Override
-    public UserDto partialUpdateUserById(String id) {
+    public ResponseUserDto partialUpdateUserById(String id) {
         return null;
     }
 
