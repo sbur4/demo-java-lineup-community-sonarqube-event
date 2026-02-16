@@ -41,3 +41,8 @@ spring:
         trace: false
         web-allow-others: false
 
+
+security:
+  password:
+    algorithm: HmacSHA512
+    key: EPAM
