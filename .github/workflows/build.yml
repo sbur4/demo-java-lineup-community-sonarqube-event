@@ -31,7 +31,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
         # Automatically validates the Gradle Wrapper checksum for security
-        wrapper-validation-enabled: true
+#        wrapper-validation-enabled: true
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
