@@ -9,6 +9,7 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 @Configuration
 public class PasswordConfig {
 
+    // WARNING: used Argon password encoder!
     @Bean
     public Argon2PasswordEncoder initArgonPasswordEncoder() {
         log.info("Initializing Argon2PasswordEncoder bean with version '{}'.", 5_8);
