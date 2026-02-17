@@ -2,6 +2,7 @@ package com.lineup.java.demo.core.service;
 
 import com.lineup.java.demo.core.dto.CreateUserDto;
 import com.lineup.java.demo.core.dto.ResponseUserDto;
+import com.lineup.java.demo.core.dto.UpdateUserDto;
 
 import java.util.List;
 
@@ -9,15 +10,15 @@ public interface UserService {
 
     List<ResponseUserDto> findAllUsers();
 
-    UserDto findUserById(String id);
+    ResponseUserDto findUserById(String id);
 
-    UserDto findUserByEmail(String id);
+    ResponseUserDto findUserByEmail(String email);
 
-    UserDto createUser(CreateUserDto dto);
+    ResponseUserDto createUser(CreateUserDto dto);
 
-    UserDto fullUpdateUserById(String id);
+    ResponseUserDto fullUpdateUserById(UpdateUserDto dto);
 
-    UserDto partialUpdateUserById(String id);
+    ResponseUserDto partialUpdateUserById(UpdateUserDto dto);
 
-    Void deleteUserById(String id);
+    void deleteUserById(String id);
 }

@@ -27,6 +27,9 @@ repositories {
 
 ext {
     lombokVersion = "1.18.42"
+    mapstructVersion = "1.6.3"
+    mapstructLombokVersion = "0.2.0"
+    jacksonVersion = "3.0-rc5"
     hibernateCoreVersion = "7.3.0.CR2"
     hibernateValidatorVersion = "9.1.0.Final"
     h2Version = "2.4.240"
@@ -39,7 +42,8 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
     implementation 'org.springframework.boot:spring-boot-starter-jetty'
-    implementation 'org.springframework.boot:spring-boot-starter-jackson'
+    implementation 'org.springframework.boot:spring-boot-jackson2'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
 
     //apache http5 TODO
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.6'
@@ -68,20 +72,24 @@ dependencies {
     // h2
     runtimeOnly "com.h2database:h2:${h2Version}"
     // mapper
-    implementation 'org.mapstruct:mapstruct:1.6.3'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapstructLombokVersion}"
 
-    // logs
+    // slf4j
     implementation 'org.springframework.boot:spring-boot-starter-logging'
 
     // lombok
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
+    // jackson
+//    implementation 'tools.jackson.core:jackson-core:3.1.0-rc1'
+//    implementation 'tools.jackson.core:jackson-databind:3.1.0-rc1'
+//    implementation 'tools.jackson.datatype:jackson-datatype-jsr310:3.0.0-rc2'
+//    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
     // apache commons
-    implementation 'commons-codec:commons-codec:1.21.0'
-    implementation 'org.apache.commons:commons-lang3:3.20.0'
+//    implementation 'commons-codec:commons-codec:1.21.0'
+//    implementation 'org.apache.commons:commons-lang3:3.20.0'
 
     // TODO junit 6
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -94,7 +102,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-//tasks.named('wrapper') {
-//    distributionType = Wrapper.DistributionType.ALL
-//    gradleVersion = '9.3.1'
-//}
+tasks.named('wrapper') {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = '9.3.1'
+}
