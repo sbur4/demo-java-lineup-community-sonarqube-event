@@ -79,14 +79,33 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public ResponseUserDto fullUpdateUserById(UpdateUserDto dto) {
         log.info("Performing full update for user email: {}", dto.getUsername());
-        return updateWorkflow(dto, true);
+
+        User existingUser = userRepository.findByIdForUpdate(dto.getUsername())
+                .orElseThrow(userNotFound("email", dto.getUsername()));
+
+        userMapper.updateEntityFromDto(dto, existingUser);
+
+        Optional.ofNullable(dto.getRawPassword())
+                .filter(pass -> !pass.isBlank())
+                .ifPresent(pass -> existingUser.setPassword(passwordEncoder.encode(pass)));
+
+        return userMapper.toDto(userRepository.save(existingUser));
     }
 
     @Override
     @Transactional
     public ResponseUserDto partialUpdateUserById(UpdateUserDto dto) {
         log.info("Performing partial update for user email: {}", dto.getUsername());
-        return updateWorkflow(dto, false);
+        User existingUser = userRepository.findByIdForUpdate(dto.getUsername())
+                .orElseThrow(userNotFound("email", dto.getUsername()));
+
+        userMapper.updateEntityFromDto(dto, existingUser);
+
+        Optional.ofNullable(dto.getRawPassword())
+                .filter(pass -> !pass.isBlank())
+                .ifPresent(pass -> existingUser.setPassword(passwordEncoder.encode(pass)));
+
+        return userMapper.toDto(userRepository.save(existingUser));
     }
 
     @Override
